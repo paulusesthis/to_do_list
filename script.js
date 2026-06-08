@@ -4,17 +4,37 @@ const taskList = document.getElementById("taskContainer");
 let taskCounterContainer = document.getElementById("taskCounterContainer");
 let taskCounter = 0;
 let numberOfCompleted = 0;
+let tasks = [];
+
+const savedTasks = localStorage.getItem("allTasks");
+if (savedTasks) {
+    tasks = JSON.parse(savedTasks);
+
+    tasks.forEach(task => {
+        displayTask(task.text);
+    });
+}
 
 add.addEventListener("click", () => {
     if (input.value.trim() === "") {
         return;
     }
 
-    addTask(input.value);
+    saveTask(input.value);
+    displayTask(input.value);
     input.value = "";
 })
 
-function addTask(taskText) {
+function saveTask(taskText) {
+    tasks.push({
+        text: taskText,
+        completed: false
+    })
+
+    localStorage.setItem("allTasks", JSON.stringify(tasks));
+}
+
+function displayTask(taskText) {
     taskCounter++;
     taskCounterContainer.innerHTML = `Total tasks: ${taskCounter} [Completed: ${numberOfCompleted}]`;
 
@@ -43,6 +63,8 @@ function addTask(taskText) {
 
     deleteBtn.addEventListener("click", () => {
         taskDiv.remove();
+        tasks = tasks.filter(task => task.text !== taskText);
+        localStorage.setItem("allTasks", JSON.stringify(tasks));
 
         taskCounter = document.querySelectorAll("#taskContainer > div").length;
         numberOfCompleted = document.querySelectorAll(".completed").length;
