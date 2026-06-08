@@ -2,7 +2,6 @@ const input = document.getElementById("taskInput");
 const add = document.getElementById("addButton");
 const taskList = document.getElementById("taskContainer");
 let taskCounterContainer = document.getElementById("taskCounterContainer");
-let tasks = [];
 let taskCounter = 0;
 let numberOfCompleted = 0;
 
