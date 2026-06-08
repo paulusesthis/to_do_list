@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/353bd79a2e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>To Do List</title>
+    <base target="_blank">
+</head>
+
+<body class="bg-[#0C1825] h-screen flex items-center justify-center">
+    <div
+        class="main-container bg-[#202c39a9] flex flex-col p-10 rounded-xl shadow-[0_15px_35px_rgba(0,0,0,0.12)] w-[500px]">
+        <h1 class="text-3xl font-bold mb-6 text-white">To-Do List</h1>
+
+        <div class="input flex gap-3 text-white">
+            <input type="text" placeholder="Enter a new task" id="taskInput"
+                class="w-full px-4 py-2 border-[0.1px] border-gray-600 bg-[#202c39a9] rounded-lg focus:outline-none focus:border-gray-300 placeholder:text-gray-400 placeholder:text-sm">
+            <button
+                class="bg-[#C28E08] px-5 py-2 text-center font-semibold text-sm rounded-md hover:bg-[#c28d08c1] transition-colors duration-150 flex gap-1 items-center justify-center"
+                id="addButton">ADD <span><i class="fa-solid fa-circle-plus"
+                        style="color: rgb(255, 255, 255);"></i></span></button>
+        </div>
+
+        <p id="taskCounterContainer" class="text-gray-300 mt-6 mx-2">Total tasks: 0 [Completed: 0]</p>
+
+        <div class="tasks text-white mt-1 flex flex-col mx-3" id="taskContainer">
+            <!-- <div class="flex items-center border-b-[0.1px] border-gray-600 py-3 mt-2">
+                <input type="checkbox" class="w-4 h-4 flex-shrink-0 accent-[#ecb424]">
+                <p class="text-[14px] w-full mx-3">Task 1</p>
+                <button
+                    class="bg-[#C63A36] px-3 py-1 text-center font-normal rounded-sm hover:bg-[#c63b36b9] transition-colors duration-150 text-sm flex-shrink-0">Delete</button>
+            </div>
+            <div class="flex items-center border-b-[0.1px] border-gray-600 py-3 mt-2">
+                <input type="checkbox" class="w-4 h-4 flex-shrink-0 accent-[#ecb424]">
+                <p class="text-[14px] w-full mx-3">Task 1</p>
+                <button
+                    class="bg-[#C63A36] px-3 py-1 text-center font-normal rounded-sm hover:bg-[#c63b36b9] transition-colors duration-150 text-sm flex-shrink-0">Delete</button>
+            </div> -->
+        </div>
+    </div>
+</body>
+
+</html>
