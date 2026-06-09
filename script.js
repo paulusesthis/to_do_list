@@ -2,8 +2,6 @@ const input = document.getElementById("taskInput");
 const add = document.getElementById("addButton");
 const taskList = document.getElementById("taskContainer");
 let taskCounterContainer = document.getElementById("taskCounterContainer");
-let taskCounter = 0;
-let numberOfCompleted = 0;
 let tasks = [];
 
 const savedTasks = localStorage.getItem("allTasks");
@@ -70,7 +68,7 @@ function displayTask(task) {
     deleteBtn.className = "bg-[#C63A36] px-3 py-1 text-center font-normal rounded-sm hover:bg-[#c63b36b9] transition-colors duration-150 text-sm flex-shrink-0";
 
     deleteBtn.addEventListener("click", () => {
-        taskDiv.remove();       //remove from DOM
+        taskList.removeChild(taskDiv);     //remove from DOM
         tasks = tasks.filter(t => t !== task);
         localStorage.setItem("allTasks", JSON.stringify(tasks));
 
