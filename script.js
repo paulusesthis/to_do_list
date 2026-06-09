@@ -10,34 +10,36 @@ const savedTasks = localStorage.getItem("allTasks");
 if (savedTasks) {
     tasks = JSON.parse(savedTasks);
 
-    tasks.forEach(task => {
-        displayTask(task.text);
-    });
-}
+    for (let i = 0; i < tasks.length; i++) {
+        displayTask(tasks[i]);
+    }
+
+    updateCounter();
+};
 
 add.addEventListener("click", () => {
     if (input.value.trim() === "") {
         return;
     }
 
-    saveTask(input.value);
-    displayTask(input.value);
+    const task = saveTask(input.value);
+    displayTask(task);
     input.value = "";
+    updateCounter();
 })
 
 function saveTask(taskText) {
-    tasks.push({
+    const task = {
         text: taskText,
         completed: false
-    })
+    }
 
+    tasks.push(task);
     localStorage.setItem("allTasks", JSON.stringify(tasks));
+    return task;
 }
 
-function displayTask(taskText) {
-    taskCounter++;
-    taskCounterContainer.innerHTML = `Total tasks: ${taskCounter} [Completed: ${numberOfCompleted}]`;
-
+function displayTask(task) {
     const taskDiv = document.createElement("div");
     taskDiv.className = "flex items-center border-b-[0.1px] border-gray-600 py-3 mt-2";
 
@@ -45,31 +47,33 @@ function displayTask(taskText) {
     checkBox.type = "checkbox";
     checkBox.className = "w-4 h-4 flex-shrink-0 accent-[#ecb424]";
 
+    if (task.completed) {
+        checkBox.checked = true;
+        taskDiv.classList.add("completed");
+    }
+
     checkBox.addEventListener("click", () => {
         taskDiv.classList.toggle("completed");
+        task.completed = checkBox.checked;
+        localStorage.setItem("allTasks", JSON.stringify(tasks));
 
-        numberOfCompleted = document.querySelectorAll(".completed").length;
-
-        taskCounterContainer.innerHTML = `Total tasks: ${taskCounter} [Completed: ${numberOfCompleted}]`;
+        updateCounter();
     });
 
     const text = document.createElement("p");
     text.className = "text-[14px] w-full mx-3";
-    text.innerText = taskText;
+    text.innerText = task.text;
 
     const deleteBtn = document.createElement("button");
     deleteBtn.innerText = "Delete";
     deleteBtn.className = "bg-[#C63A36] px-3 py-1 text-center font-normal rounded-sm hover:bg-[#c63b36b9] transition-colors duration-150 text-sm flex-shrink-0";
 
     deleteBtn.addEventListener("click", () => {
-        taskDiv.remove();
-        tasks = tasks.filter(task => task.text !== taskText);
+        taskDiv.remove();       //remove from DOM
+        tasks = tasks.filter(t => t !== task);
         localStorage.setItem("allTasks", JSON.stringify(tasks));
 
-        taskCounter = document.querySelectorAll("#taskContainer > div").length;
-        numberOfCompleted = document.querySelectorAll(".completed").length;
-
-        taskCounterContainer.innerHTML = `Total tasks: ${taskCounter} [Completed: ${numberOfCompleted}]`;
+        updateCounter();
     });
 
     taskDiv.append(checkBox);
@@ -77,4 +81,12 @@ function displayTask(taskText) {
     taskDiv.append(deleteBtn);
 
     taskList.append(taskDiv);
+}
+
+function updateCounter() {      //updates the total and completed
+    taskCounter = tasks.length;
+
+    numberOfCompleted = tasks.filter(task => task.completed).length;
+
+    taskCounterContainer.innerHTML = `Total tasks: ${taskCounter} [Completed: ${numberOfCompleted}]`;
 }
