@@ -19,6 +19,7 @@ if (savedTasks) {
 
 add.addEventListener("click", () => {
     if (input.value.trim() === "") {
+        alert("Please input a task");
         return;
     }
 
