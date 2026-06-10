@@ -26,14 +26,20 @@
                         style="color: rgb(255, 255, 255);"></i></span></button>
         </div>
 
-        <p id="taskCounterContainer" class="text-gray-300 mt-6 mx-2">Total tasks: 0 [Completed: 0]</p>
+        <div class="flex justify-between mx-2">
+            <p id="taskCounterContainer" class="text-gray-300 mt-6 mx-2">Total tasks: 0 [Completed: 0]</p>
+
+            <p id="clearAll" class="text-gray-300 mt-6 mx-2 hover:text-gray-400 cursor-pointer">Clear All</p>
+        </div>
 
         <div class="tasks text-white mt-1 flex flex-col mx-3" id="taskContainer">
             <!-- <div class="flex items-center border-b-[0.1px] border-gray-600 py-3 mt-2">
                 <input type="checkbox" class="w-4 h-4 flex-shrink-0 accent-[#ecb424]">
                 <p class="text-[14px] w-full mx-3">Task 1</p>
                 <button
-                    class="bg-[#C63A36] px-3 py-1 text-center font-normal rounded-sm hover:bg-[#c63b36b9] transition-colors duration-150 text-sm flex-shrink-0">Delete</button>
+                    class="bg-[#1861afa9] px-3 py-1 mr-1 flex items-center justify-center font-normal rounded-md hover:bg-[#1861af5f] transition-colors duration-150 text-sm flex-shrink-0">Edit</button>
+                <button
+                    class="bg-[#C63A36] px-3 py-1 flex items-center justify-center font-normal rounded-md hover:bg-[#c63b36b9] transition-colors duration-150 text-sm flex-shrink-0">Delete</button>
             </div>
             <div class="flex items-center border-b-[0.1px] border-gray-600 py-3 mt-2">
                 <input type="checkbox" class="w-4 h-4 flex-shrink-0 accent-[#ecb424]">

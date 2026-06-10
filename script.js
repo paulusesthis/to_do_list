@@ -1,6 +1,7 @@
 const input = document.getElementById("taskInput");
 const add = document.getElementById("addButton");
 const taskList = document.getElementById("taskContainer");
+const clearButton = document.getElementById("clearAll");
 let taskCounterContainer = document.getElementById("taskCounterContainer");
 let tasks = [];
 
@@ -27,6 +28,23 @@ add.addEventListener("click", () => {
     updateCounter();
 })
 
+clearButton.addEventListener("click", () => {
+    if (tasks.length === 0) {
+        alert("No tasks to clear")
+        return;
+    }
+
+    const confirmClear = confirm("Are you sure you want to clear all tasks?");
+    if (!confirmClear) {
+        return;
+    }
+
+    tasks = [];
+    localStorage.removeItem("allTasks");
+    taskList.innerHTML = "";
+    updateCounter();
+})
+
 function saveTask(taskText) {
     const task = {
         text: taskText,
@@ -40,7 +58,7 @@ function saveTask(taskText) {
 
 function displayTask(task) {
     const taskDiv = document.createElement("div");
-    taskDiv.className = "flex items-center border-b-[0.1px] border-gray-600 py-3 mt-2";
+    taskDiv.className = "flex items-center border-b-[0.1px] border-gray-600 px-3 py-3 mt-2 hover:bg-[#001325a6]";
 
     const checkBox = document.createElement("input");
     checkBox.type = "checkbox";
@@ -63,9 +81,27 @@ function displayTask(task) {
     text.className = "text-[14px] w-full mx-3";
     text.innerText = task.text;
 
+    const editBtn = document.createElement("button");
+    editBtn.className = "bg-[#1861afa9] px-3 py-1 mr-1 flex items-center justify-center font-normal rounded-md hover:bg-[#1861af5f] transition-colors duration-150 text-sm flex-shrink-0";
+    editBtn.innerText = "Edit";
+
+    editBtn.addEventListener("click", () => {
+        const newText = prompt("Edit task: ", task.text);
+
+        if (newText === null || newText.trim() === "") {
+            return;
+        }
+
+        task.text = newText.trim();
+
+        text.innerText = task.text;
+
+        localStorage.setItem("allTasks", JSON.stringify(tasks));
+    })
+
     const deleteBtn = document.createElement("button");
     deleteBtn.innerText = "Delete";
-    deleteBtn.className = "bg-[#C63A36] px-3 py-1 text-center font-normal rounded-sm hover:bg-[#c63b36b9] transition-colors duration-150 text-sm flex-shrink-0";
+    deleteBtn.className = "bg-[#C63A36] px-3 py-1 flex items-center justify-center font-normal rounded-md hover:bg-[#c63b36b9] transition-colors duration-150 text-sm flex-shrink-0";
 
     deleteBtn.addEventListener("click", () => {
         taskList.removeChild(taskDiv);     //remove from DOM
@@ -77,6 +113,7 @@ function displayTask(task) {
 
     taskDiv.append(checkBox);
     taskDiv.append(text);
+    taskDiv.append(editBtn);
     taskDiv.append(deleteBtn);
 
     taskList.append(taskDiv);
