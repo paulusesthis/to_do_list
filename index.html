@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/353bd79a2e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/jpg"
+        href="https://res.cloudinary.com/dbiav4ehm/image/upload/v1781097754/to-do-list-icon-concept-vector_fzyhz2.jpg">
     <script src="script.js" defer></script>
     <title>To Do List</title>
     <base target="_blank">
@@ -26,10 +28,10 @@
                         style="color: rgb(255, 255, 255);"></i></span></button>
         </div>
 
-        <div class="flex justify-between mx-2">
-            <p id="taskCounterContainer" class="text-gray-300 mt-6 mx-2">Total tasks: 0 [Completed: 0]</p>
+        <div class="flex justify-between mx-2 mt-6 text-gray-300">
+            <p id="taskCounterContainer">Total tasks: 0 [Completed: 0]</p>
 
-            <p id="clearAll" class="text-gray-300 mt-6 mx-2 hover:text-gray-400 cursor-pointer">Clear All</p>
+            <p id="clearAll" class="hover:text-gray-400 cursor-pointer">Clear All</p>
         </div>
 
         <div class="tasks text-white mt-1 flex flex-col mx-3" id="taskContainer">
